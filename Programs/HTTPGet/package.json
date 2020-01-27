@@ -1,0 +1,11 @@
+{
+  "name": "server.js",
+  "version": "1.0.0",
+  "description": "Program to create a server and read a JSON file",
+  "main": "server.js",
+  "scripts": {
+    "test": "NA"
+  },
+  "author": "Priyanka Kapoor",
+  "license": "ISC"
+}
