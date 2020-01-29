@@ -1,3 +1,9 @@
+/**********PROGRAM TO CREATE API ENDPOINTS****************/
+/**
+ * Author: Priyanka Kapoor
+ * Date: 29-January-2020
+ *********************************************************/
+
 const https = require('https'); 
 const http=require('http');
 const url=require('url');
@@ -8,7 +14,7 @@ http.createServer(function (request, response) {
       
     const requestPath = url.parse(request.url).pathname; 
     const queryData = url.parse(request.url, true).query;
-    
+    var monthName=queryData.month;
     response.writeHead(200, {'Content-Type': 'application/json'});  
     var body = '';
    
@@ -25,9 +31,18 @@ http.createServer(function (request, response) {
 
             res.on('data', function(chunk){
                 body += chunk;
-                gitResponse = JSON.parse(body).public;
-                response.write('JSON Data'+JSON.stringify(gitResponse));
+                gitResponse = JSON.parse(body).publicHolidays[monthName];
                 console.log("Got a response: ", gitResponse);
+                if(gitResponse === undefined){
+                    response.write('Holiday not Found');
+                    console.log('Holiday not Found');
+                }
+                else{
+                    for (let i=0;i<gitResponse.length; i++){
+                        response.write('\n Title :'+JSON.stringify(gitResponse[i].title));
+                        response.write('\n Date :'+JSON.stringify(gitResponse[i].date));
+                    }   
+                }         
             });
         
             res.on('end', function()
@@ -46,9 +61,19 @@ http.createServer(function (request, response) {
 
             res.on('data', function(chunk){
                 body += chunk;
-                gitResponse = JSON.parse(body).flexible;
-                response.write('JSON Data'+JSON.stringify(gitResponse));
+                gitResponse = JSON.parse(body).flexibleHolidays[monthName];
                 console.log("Got a response: ", gitResponse);
+                if(gitResponse === undefined){
+                    response.write('Holiday not Found');
+                    console.log('Holiday not Found');
+                }
+                else{
+                    for (let i=0;i<gitResponse.length; i++){
+                        response.write('\n Title :'+JSON.stringify(gitResponse[i].title));
+                        response.write('\n Date :'+JSON.stringify(gitResponse[i].date));
+                    }                                 
+                }
+               
             });
         
             res.on('end', function()
