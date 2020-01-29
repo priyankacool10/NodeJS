@@ -1,0 +1,11 @@
+{
+  "name": "weatherapi",
+  "version": "1.0.0",
+  "description": "Program to fetch temperature from Weater API",
+  "main": "weatherapi.js",
+  "scripts": {
+    "test": "NA"
+  },
+  "author": "Priyanka Kapoor",
+  "license": "ISC"
+}
